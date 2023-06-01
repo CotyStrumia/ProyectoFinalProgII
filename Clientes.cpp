@@ -2,8 +2,8 @@
 
 Clientes::Clientes(){
         numero=0;
-        nombre=" ";
-        apellido=" ";
+        nombre="";
+        apellido="";
         tipo=" ";
         apertura=0;
         estado=" ";
@@ -69,4 +69,13 @@ void Clientes::baja(int cinnumero) {
     //SE VE DESPUES LACONCHADELALORA
     setEstado("BAJA");
     cout<<"Su estado es de: "<<getEstado() << endl;
+}
+
+void Clientes::mostrarCliente() {
+    cout << "NUMERO DE CLIENTE: " << numero << endl;
+    cout << "NOMBRE: " << nombre << endl;
+    cout << "APELLIDO: " << apellido << endl;
+    cout << "TIPO: " << tipo << endl;
+    cout << "ANIO DE APERTURA: " << apertura << endl;
+    cout << "ESTADO: " << estado << endl;
 }

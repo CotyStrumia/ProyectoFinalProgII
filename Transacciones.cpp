@@ -102,3 +102,12 @@ void Transacciones::deposito() {
         cout << "El monto a depositar debe ser positivo" << endl;
     }
 }
+
+void Transacciones::mostrarTransaccion() {
+    cout << "NUMERO DE TRANSACCION: " << getNroTran() << endl;
+    cout << "CANTIDAD: " << getCant() << endl;
+    cout << "TIPO: " << getTipo() << endl;
+    cout << "DIA: " << getDia() << endl;
+    cout << "MES: " << getMes() << endl;
+    cout << "ANIO: " << getAnio() << endl;
+}

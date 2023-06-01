@@ -1,53 +1,15 @@
 #include <iostream>
-#include <fstream>
 #include <string>
+#include<string.h>
 #include "Clientes.h"
 using namespace std;
  //salchichones primavera=3
 
-
-Clientes baseClientes[50];
+Clientes Cliente[50];
 Transacciones baseMov[50];
 int ubicC=0;
 int ubicT=0;
-
-/*void leerArchivos(){
-  int cantPersonas, cantExtracciones;
-  string archivoCliente, archivoExtracciones, fila;
-
-  cout<<"Ingrese el nombre del archivo de clientes"<<endl;
-  cin>>archivoCliente;
-  cout<<"Ingrese la cantidad de clientes que se ingresaran"<<endl;
-  cin>>cantPersonas;
-
-ifstream archivo(archivoCliente);
-  if (!archivo){
-      cout<<"No se puede abrir el archivo"<<endl;
-  }else {
-      while (getline (archivo, fila) && ubicC<cantPersonas){
-          istringstream iss(fila);
-          iss >> baseClientes[ubicC].setNumero() >> baseClientes[ubicC].setNombre() >>baseClientes[ubicC].getApellido() >>baseClientes[ubicC].setTipo() >> baseClientes[ubicC].setApertura() >> baseClientes[ubicC].setEstado();
-          ubicC++;
-      }
-  }
-  archivo.close();
-  //ver como enlazar el archivo con el cliente puntual
-  cout<<"Ingrese el nombre del archivo de clientes"<<endl;
-  cin>>archivoExtracciones;
-  cout<<"Ingrese la cantidad de clientes que se ingresaran"<<endl;
-  cin>>cantExtracciones;
-  ifstream archivo(archivoExtracciones);
-  if (!archivo){
-      cout<<"No se puede abrir el archivo"<<endl;
-  }else {
-      while (getline (archivo, fila) && ubicT<cantExtracciones){
-          istringstream iss(fila);
-          iss >> baseMov[ubicT].setNroTran() >> baseMov[ubicT].setCant() >> baseMov[ubicT].setTipo(), baseMov[ubicT].setDia() >> baseMov[ubicT].setMes() >> baseMov[ubicT].setAnio();
-          ubicT++;
-      }
-  }
-  archivo.close();
-}*/
+int i=0;
 
  void menuTiempo(){
      int opc=1;
@@ -57,21 +19,15 @@ ifstream archivo(archivoCliente);
          cout<<"2.Por un año"<<endl;
          cout<<"3.Total"<<endl;
          cin>>opc;
-         switch (opc) {
-             case 1:
 
-                 break;
-             case 2:
-                 break;
-             case 3:
-                 break;
-         }
+         //Llamamos a una funcion que evalue segun la opcion ingresada asi no hacemos un switch
      }
  }
 
  void altaCliente(){
-     int cinNumero, cinApertura;
+     int num, cinApertura;
      string cinNombre, cinApellido, cinTipo, cinEstado;
+     num=ubicC+1;
      cout << "Nombre" << endl;
      cin >> cinNombre;
      cout << "Apellido" << endl;
@@ -80,14 +36,20 @@ ifstream archivo(archivoCliente);
      cin >> cinTipo;
      cout << "Momento de apertura de la cuenta" << endl;
      cin >> cinApertura;
-     Clientes cliente2(0, cinNombre, cinApellido, cinTipo, cinApertura, "Activo");
+     Cliente[ubicC] = Clientes(num, cinNombre, cinApellido, cinTipo, cinApertura, "Activo");
+     ubicC++;
+
  }
 
  void bajaCliente(){
      int cinNumero;
      cout << "Ingrese el numero de cliente" << endl;
      cin >> cinNumero;
-     baseClientes[0].baja(cinNumero);
+     for (int j=0; j<50; j++){
+         if (Cliente[j].getNumero()==cinNumero){
+              Cliente[j].baja(cinNumero);
+         }
+     }
  }
 
  void extraccion(){
@@ -97,8 +59,10 @@ ifstream archivo(archivoCliente);
      cin>>cinNumero;
      cout<<"Ingrese el monto a extraer"<<endl;
      cin>>cinMonto;
-     baseMov[0].extraccion();
+     baseMov[ubicT].extraccion();
+     ubicT++;
  }
+
  void deposito(){
      int cinNumero;
      float cinMonto;
@@ -106,14 +70,34 @@ ifstream archivo(archivoCliente);
      cin>>cinNumero;
      cout<<"Ingrese el monto a retirar"<<endl;
      cin>>cinMonto;
-     baseMov[0].deposito();
+     baseMov[ubicT].deposito();
+     ubicT++;
+ }
+ void consultaPorNumero(){
+     int cinNumero;
+     cout << "Ingrese el numero de cliente" << endl;
+     cin >> cinNumero;
+     for (int j=0; j<50; j++){
+         if (Cliente[j].getNumero()==cinNumero){
+              Cliente[j].mostrarCliente();
+         }
+     }
+ }
+
+ void consultaPorNumTr(){
+     int cinNumero;
+     cout << "Ingrese el numero de transaccion: " << endl;
+     cin >> cinNumero;
+     for(int j=0; j<50; j++){
+         if(baseMov[j].getNroTran()==cinNumero){
+             baseMov[j].mostrarTransaccion();
+         }
+     }
  }
 
  void menuExtra(){
-
-
-
      int op=1;
+     int cinNumero;
      while (op>0 && op<5){
          cout<<"Ingrese una opcion"<<endl;
          cout<<"1.Consultar cliente (Por numero)"<<endl;
@@ -122,15 +106,23 @@ ifstream archivo(archivoCliente);
          cout<<"4.Informe de extraccion y deposito por cliente (numero)"<<endl;
          cin>>op;
          switch (op) {
-             case 1:
+             case 1:{
+
                  break;
-             case 2:
+             }
+             case 2: {
+
                  break;
-             case 3:
+             }
+             case 3: {
+
+
                  break;
-             case 4:
-                 menuTiempo();
+             }
+             case 4: {
+
                  break;
+             }
          }
      }
  };
@@ -139,18 +131,26 @@ ifstream archivo(archivoCliente);
 int main() {
     int opcion = 1;
 
-
+    /* Clientes clientePrueba(3, "Bautista", "Juncos", "black", 2020, "ACTIVO");
+    cout<<clientePrueba.getNumero()<<endl;
+    cout<<clientePrueba.getNombre()<<endl;
+    cout<<clientePrueba.getApellido()<<endl;
+    cout<<clientePrueba.getTipo()<<endl;
+    cout<<clientePrueba.getApertura()<<endl;
+    cout<<clientePrueba.getEstado()<<endl; */
 
     cout<<"Bienvenido a banco UCC"<<endl;
     while (opcion>0 && opcion<6){
+
         cout<<"Menu:"<<endl;
         cout<<"1.Alta cliente"<<endl;
         cout<<"2.Baja cliente"<<endl;
         cout<<"3.Extraccion de dinero"<<endl;
         cout<<"4.Ingreso de dinero"<<endl;
-        cout<<"5.Más opciones"<<endl;
+        cout<<"5.Mas opciones"<<endl;
         cout<<"6.Salir"<<endl;
         cin>>opcion;
+
         switch (opcion) {
             case 1:
                altaCliente();
@@ -165,9 +165,8 @@ int main() {
                 deposito();
                 break;
             case 5:
-              menuExtra();
+                menuExtra();
                 break;
         }
     }
-
 }

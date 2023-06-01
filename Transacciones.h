@@ -20,7 +20,6 @@ public:
     Transacciones();
     Transacciones(int, float, float, char, int, int , int);
 
-
     void setNroTran(int _nro_transaccion);
     void setCantTotal(float _cantidad_total);
     void setCant(float _cantidad);
@@ -39,6 +38,8 @@ public:
 
     void extraccion();
     void deposito();
+
+    void mostrarTransaccion();
 
 };
 

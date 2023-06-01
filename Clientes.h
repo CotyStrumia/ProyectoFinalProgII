@@ -35,6 +35,8 @@ public:
 
     void baja(int);
 
+    void mostrarCliente();
+
 };
 
 
