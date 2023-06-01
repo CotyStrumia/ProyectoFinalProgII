@@ -11,45 +11,43 @@ Transacciones baseMov[50];
 int ubicC=0;
 int ubicT=0;
 
-void leerArchivos(){
-    int cantPersonas, cantExtracciones;
-    string archivoCliente, archivoExtracciones, fila;
+/*void leerArchivos(){
+  int cantPersonas, cantExtracciones;
+  string archivoCliente, archivoExtracciones, fila;
 
-    cout<<"Ingrese el nombre del archivo de clientes"<<endl
-    cin>>archivoCliente;
-    cout<<"Ingrese la cantidad de clientes que se ingresaran"<<endl;
-    cin>>cantPersonas;
+  cout<<"Ingrese el nombre del archivo de clientes"<<endl;
+  cin>>archivoCliente;
+  cout<<"Ingrese la cantidad de clientes que se ingresaran"<<endl;
+  cin>>cantPersonas;
 
-    ifstream archivo(archivoCliente);
-    if (!archivo){
-        cout<<"No se puede abrir el archivo"<<endl;
-    }else {
-        while (getline (archivo, fila) && ubicC<cantPersonas){
-            istringstream iss(fila);
-            iss >> baseClientes[ubicC].setNumero() >> baseClientes[ubicC].setNombre() >>baseClientes[ubicC].getApellido()
-                >>baseClientes[ubicC].setTipo() >> baseClientes[ubicC].setApertura() >> baseClientes[ubicC].setEstado();
-            ubicC++;
-        }
-    }
-    archivo.close();
-    //ver como enlazar el archivo con el cliente puntual
-    cout<<"Ingrese el nombre del archivo de clientes"<<endl
-    cin>>archivoExtracciones;
-    cout<<"Ingrese la cantidad de clientes que se ingresaran"<<endl;
-    cin>>cantExtracciones;
-    ifstream archivo(archivoExtracciones);
-    if (!archivo){
-        cout<<"No se puede abrir el archivo"<<endl;
-    }else {
-        while (getline (archivo, fila) && ubicT<cantExtracciones){
-            istringstream iss(fila);
-            iss >> baseMov[ubicT].setNroTran() >> baseMov[ubicT].setCant() >> baseMov[ubicT].setTipo(), baseMov[ubicT].setDia()
-            >> baseMov[ubicT].setMes() >> baseMov[ubicT].setAnio();
-            i++;
-        }
-    }
-    archivo.close();
-}
+ifstream archivo(archivoCliente);
+  if (!archivo){
+      cout<<"No se puede abrir el archivo"<<endl;
+  }else {
+      while (getline (archivo, fila) && ubicC<cantPersonas){
+          istringstream iss(fila);
+          iss >> baseClientes[ubicC].setNumero() >> baseClientes[ubicC].setNombre() >>baseClientes[ubicC].getApellido() >>baseClientes[ubicC].setTipo() >> baseClientes[ubicC].setApertura() >> baseClientes[ubicC].setEstado();
+          ubicC++;
+      }
+  }
+  archivo.close();
+  //ver como enlazar el archivo con el cliente puntual
+  cout<<"Ingrese el nombre del archivo de clientes"<<endl;
+  cin>>archivoExtracciones;
+  cout<<"Ingrese la cantidad de clientes que se ingresaran"<<endl;
+  cin>>cantExtracciones;
+  ifstream archivo(archivoExtracciones);
+  if (!archivo){
+      cout<<"No se puede abrir el archivo"<<endl;
+  }else {
+      while (getline (archivo, fila) && ubicT<cantExtracciones){
+          istringstream iss(fila);
+          iss >> baseMov[ubicT].setNroTran() >> baseMov[ubicT].setCant() >> baseMov[ubicT].setTipo(), baseMov[ubicT].setDia() >> baseMov[ubicT].setMes() >> baseMov[ubicT].setAnio();
+          ubicT++;
+      }
+  }
+  archivo.close();
+}*/
 
  void menuTiempo(){
      int opc=1;
@@ -89,7 +87,7 @@ void leerArchivos(){
      int cinNumero;
      cout << "Ingrese el numero de cliente" << endl;
      cin >> cinNumero;
-     cliente1().baja(cinNumero);
+     baseClientes[0].baja(cinNumero);
  }
 
  void extraccion(){
@@ -99,7 +97,7 @@ void leerArchivos(){
      cin>>cinNumero;
      cout<<"Ingrese el monto a extraer"<<endl;
      cin>>cinMonto;
-     transaccion1().extraccion();
+     baseMov[0].extraccion();
  }
  void deposito(){
      int cinNumero;
@@ -108,7 +106,7 @@ void leerArchivos(){
      cin>>cinNumero;
      cout<<"Ingrese el monto a retirar"<<endl;
      cin>>cinMonto;
-     transaccion1().deposito();
+     baseMov[0].deposito();
  }
 
  void menuExtra(){
