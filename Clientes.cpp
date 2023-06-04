@@ -7,15 +7,17 @@ Clientes::Clientes(){
         tipo=" ";
         apertura=0;
         estado=" ";
+        saldo=0;
 }
 
-Clientes::Clientes(int _numero, string _nombre, string _apellido, string _tipo, int _apertura, string _estado) {
+Clientes::Clientes(int _numero, string _nombre, string _apellido, string _tipo, int _apertura, string _estado, float _saldo) {
     numero = _numero;
     nombre = _nombre;
     apellido = _apellido;
     tipo = _tipo;
     apertura = _apertura;
     estado = _estado;
+    saldo= _saldo;
 }
 
 void Clientes::setNumero(int _numero) {
@@ -65,8 +67,14 @@ string Clientes::getEstado(){
     return estado;
 }
 
+void Clientes::setSaldo(float _saldo) {
+    saldo=_saldo;
+}
+float Clientes::getSaldo() {
+    return saldo;
+}
+
 void Clientes::baja(int cinnumero) {
-    //SE VE DESPUES LACONCHADELALORA
     setEstado("BAJA");
     cout<<"Su estado es de: "<<getEstado() << endl;
 }
@@ -78,4 +86,55 @@ void Clientes::mostrarCliente() {
     cout << "TIPO: " << tipo << endl;
     cout << "ANIO DE APERTURA: " << apertura << endl;
     cout << "ESTADO: " << estado << endl;
+}
+
+void Clientes::extraccion(int num, float monto) {
+
+
+    //Transacciones[i].setTipo('E');
+    //cout << "SU MONTO ACTUAL ES DE: " << Transacciones[i].getCant() << endl;
+
+
+    if(monto <= getSaldo() && monto>0){
+
+    }
+
+    /* if (Transacciones[i].getCant() <= saldo && monto > 0) {
+
+        saldo = saldo - Transacciones[i].getCant();
+
+        cout << "SU MONTO ACTUALIZADO ES DE: " << saldo << endl;
+
+        Transacciones[i] = Transacciones(i, saldo, monto, 'E', dia, mes, anio);
+
+    } else {
+
+        cout << "El monto a extraer debe ser positivo y/o no debe superar la cantidad actual en la cuenta"
+             << endl;
+
+    } */
+}
+
+
+
+void Clientes::deposito(float monto) {
+
+    int dia, mes, anio;
+    cout << "Ingrese la fecha actual: " << endl;
+    cout << "Dia: " << endl;
+    cin >> dia;
+    cout << "Mes: " << endl;
+    cin >> mes;
+    cout << "Anio: " << endl;
+    cin >> anio;
+
+    //Transacciones[i].setTipo('D');
+    cout<<"SU MONTO ACTUAL ES DE: " << getSaldo() << endl;
+
+    if(monto <= getSaldo() && monto > 0){
+        setSaldo(getSaldo()+monto);
+        cout<<"SU MONTO ACTUALIZADO ES DE: "<<getSaldo()<<endl;
+    } else {
+        cout << "El monto a extraer debe ser positivo y/o no debe superar la cantidad actual en la cuenta" << endl;
+    }
 }

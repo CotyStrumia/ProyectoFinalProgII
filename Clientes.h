@@ -12,12 +12,13 @@ protected:
     string tipo;
     int apertura;
     string estado;
-
+    float saldo;
 public:
-    Transacciones Transacciones;
+
+    Transacciones Transacciones[50];
 
     Clientes();
-    Clientes(int, string, string, string, int, string);
+    Clientes(int, string, string, string, int, string, float);
 
     void setNumero(int _numero);
     void setNombre(string _nombre);
@@ -25,6 +26,7 @@ public:
     void setTipo (string _tipo);
     void setApertura (int _apertura);
     void setEstado (string _estado);
+    void setSaldo(float _saldo);
 
     int getNumero();
     string getNombre();
@@ -32,9 +34,11 @@ public:
     string getTipo();
     int getApertura();
     string getEstado();
+    float getSaldo();
 
     void baja(int);
-
+    void extraccion(int num, float monto);
+    void deposito(float);
     void mostrarCliente();
 
 };

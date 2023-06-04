@@ -4,6 +4,7 @@
 
 #include "Transacciones.h"
 
+
 Transacciones::Transacciones() {
     nro_transaccion=0;
     cantidad_total=0;
@@ -81,27 +82,7 @@ int Transacciones::getAnio() {
     return anio;
 }
 
-void Transacciones::extraccion() {
-    cout<<"SU MONTO ACTUAL ES DE: " << cantidad_total << endl;
 
-    if(cantidad <= cantidad_total && cantidad > 0){
-        cantidad_total=cantidad_total - cantidad;
-        cout<<"SU MONTO ACTUALIZADO ES DE: "<<cantidad_total<<endl;
-    }else {
-        cout << "El monto a extraer debe ser positivo y/o no debe superar la cantidad actual en la cuenta" << endl;
-    }
-
-}
-
-void Transacciones::deposito() {
-    cout << "SU MONTO ACTUAL ES DE: " << cantidad_total << endl;
-    if (cantidad > 0){
-        cantidad_total = cantidad_total + cantidad;
-        cout << "SU MONTO ACTUALIZADO ES DE: " << cantidad_total << endl;
-    } else {
-        cout << "El monto a depositar debe ser positivo" << endl;
-    }
-}
 
 void Transacciones::mostrarTransaccion() {
     cout << "NUMERO DE TRANSACCION: " << getNroTran() << endl;

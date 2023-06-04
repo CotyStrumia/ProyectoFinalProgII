@@ -1,15 +1,12 @@
 #include <iostream>
 #include <string>
-#include<string.h>
 #include "Clientes.h"
 using namespace std;
  //salchichones primavera=3
 
 Clientes Cliente[50];
-Transacciones baseMov[50];
 int ubicC=0;
-int ubicT=0;
-int i=0;
+
 
  void menuTiempo(){
      int opc=1;
@@ -36,7 +33,10 @@ int i=0;
      cin >> cinTipo;
      cout << "Momento de apertura de la cuenta" << endl;
      cin >> cinApertura;
-     Cliente[ubicC] = Clientes(num, cinNombre, cinApellido, cinTipo, cinApertura, "Activo");
+     Cliente[ubicC] = Clientes(num, cinNombre, cinApellido, cinTipo, cinApertura, "Activo", 0);
+
+     cout<<"Se le ha dado alta al cliente: "<<Cliente[ubicC].getNombre()<<" "<<Cliente[ubicC].getApellido()<<" de numero "<<num<<" exitosamente"<<endl;
+
      ubicC++;
 
  }
@@ -45,22 +45,38 @@ int i=0;
      int cinNumero;
      cout << "Ingrese el numero de cliente" << endl;
      cin >> cinNumero;
+
      for (int j=0; j<50; j++){
          if (Cliente[j].getNumero()==cinNumero){
               Cliente[j].baja(cinNumero);
          }
      }
+
  }
 
  void extraccion(){
-     int cinNumero;
+     int cinNumero, dia, mes, anio, i;
      float cinMonto;
-     cout<<"Ingrese el numero de cliente"<<endl;
+
+     cout << "Ingrese el dia: " << endl;
+     cin >> dia;
+     cout << "Ingrese el mes: " << endl;
+     cin >> mes;
+     cout << "Ingrese el anio: " << endl;
+     cin >> anio;
+
+     cout<<"Ingrese su numero de cliente"<<endl;
      cin>>cinNumero;
+
+     for (i=0 ; i<50 ; i++){
+         if(Cliente[i].getNumero()==cinNumero){
+             Cliente[i].extraccion(cinNumero, cinMonto);
+         }
+     }
+
      cout<<"Ingrese el monto a extraer"<<endl;
      cin>>cinMonto;
-     baseMov[ubicT].extraccion();
-     ubicT++;
+
  }
 
  void deposito(){
@@ -70,10 +86,16 @@ int i=0;
      cin>>cinNumero;
      cout<<"Ingrese el monto a retirar"<<endl;
      cin>>cinMonto;
-     baseMov[ubicT].deposito();
-     ubicT++;
+     for (int i=0; i<50; i++){
+         if(Cliente[i].getNumero()==cinNumero){
+             Cliente[i].deposito(cinMonto);
+         }
+     }
+
+
  }
- void consultaPorNumero(){
+
+ void consultaPorNumeroCli(){
      int cinNumero;
      cout << "Ingrese el numero de cliente" << endl;
      cin >> cinNumero;
@@ -86,46 +108,54 @@ int i=0;
 
  void consultaPorNumTr(){
      int cinNumero;
-     cout << "Ingrese el numero de transaccion: " << endl;
+     cout << "Ingrese el numero de cliente: " << endl;
      cin >> cinNumero;
-     for(int j=0; j<50; j++){
-         if(baseMov[j].getNroTran()==cinNumero){
-             baseMov[j].mostrarTransaccion();
+
+         if (Cliente[cinNumero-1].getNumero()==cinNumero){
+             for (int i = 0; i < 50; ++i) {
+                 cout<<Cliente[cinNumero-1].Transacciones[cinNumero-1].getNroTran()<<" | "<<Cliente[cinNumero-1].Transacciones[i].getCant()<<" | "<<Cliente[cinNumero-1].Transacciones[i].getTipo()<<" | "<<Cliente[cinNumero-1].Transacciones[i].getDia()<<" | "<<Cliente[cinNumero-1].Transacciones[i].getMes()<<" | "<<Cliente[cinNumero-1].Transacciones[i].getAnio()<<endl;
+             }
+         }
+
+ }
+
+ void mostrarClientes(){
+     for(int i=0; i<50; i++){
+         if(Cliente[i].getNumero()!=0){
+             cout<<Cliente[i].getNumero()<<" | "<<Cliente[i].getNombre()<<" | "<<Cliente[i].getApellido()<<" | "<<Cliente[i].getTipo()<<" | "<<Cliente[i].getApertura()<<" | "<<Cliente[i].getEstado()<<endl;
          }
      }
  }
 
  void menuExtra(){
      int op=1;
-     int cinNumero;
      while (op>0 && op<5){
          cout<<"Ingrese una opcion"<<endl;
          cout<<"1.Consultar cliente (Por numero)"<<endl;
          cout<<"2.Mostrar todos los clientes"<<endl;
          cout<<"3.Transacciones de cliente (por numero)"<<endl;
-         cout<<"4.Informe de extraccion y deposito por cliente (numero)"<<endl;
+         cout<<"4.Transacciones por cliente(numero) por tiempo"<<endl;
          cin>>op;
          switch (op) {
-             case 1:{
-
+             case 1:
+                 consultaPorNumeroCli();
                  break;
-             }
-             case 2: {
 
+             case 2: {
+                 mostrarClientes();
                  break;
              }
              case 3: {
-
-
+                 consultaPorNumTr();
                  break;
              }
              case 4: {
-
+                 menuTiempo();
                  break;
              }
          }
      }
- };
+ }
 
 
 int main() {
@@ -143,9 +173,9 @@ int main() {
     while (opcion>0 && opcion<6){
 
         cout<<"Menu:"<<endl;
-        cout<<"1.Alta cliente"<<endl;
-        cout<<"2.Baja cliente"<<endl;
-        cout<<"3.Extraccion de dinero"<<endl;
+        cout<<"1.Alta cliente"<<endl;               //Listo
+        cout<<"2.Baja cliente"<<endl;               //Listo
+        cout<<"3.Extraccion de dinero"<<endl;       //Listo
         cout<<"4.Ingreso de dinero"<<endl;
         cout<<"5.Mas opciones"<<endl;
         cout<<"6.Salir"<<endl;

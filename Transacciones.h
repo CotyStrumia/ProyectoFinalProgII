@@ -36,8 +36,7 @@ public:
     int getMes();
     int getAnio();
 
-    void extraccion();
-    void deposito();
+
 
     void mostrarTransaccion();
 
