@@ -92,3 +92,4 @@ void Transacciones::mostrarTransaccion() {
     cout << "MES: " << getMes() << endl;
     cout << "ANIO: " << getAnio() << endl;
 }
+

@@ -1,5 +1,7 @@
 #include "Clientes.h"
 
+int i=0;
+
 Clientes::Clientes(){
         numero=0;
         nombre="";
@@ -88,53 +90,26 @@ void Clientes::mostrarCliente() {
     cout << "ESTADO: " << estado << endl;
 }
 
-void Clientes::extraccion(int num, float monto) {
-
-
-    //Transacciones[i].setTipo('E');
-    //cout << "SU MONTO ACTUAL ES DE: " << Transacciones[i].getCant() << endl;
-
-
-    if(monto <= getSaldo() && monto>0){
-
-    }
-
-    /* if (Transacciones[i].getCant() <= saldo && monto > 0) {
-
-        saldo = saldo - Transacciones[i].getCant();
-
-        cout << "SU MONTO ACTUALIZADO ES DE: " << saldo << endl;
-
-        Transacciones[i] = Transacciones(i, saldo, monto, 'E', dia, mes, anio);
-
-    } else {
-
-        cout << "El monto a extraer debe ser positivo y/o no debe superar la cantidad actual en la cuenta"
-             << endl;
-
-    } */
-}
-
-
 
 void Clientes::deposito(float monto) {
 
-    int dia, mes, anio;
+    int d, m, a;
     cout << "Ingrese la fecha actual: " << endl;
     cout << "Dia: " << endl;
-    cin >> dia;
+    cin >> d;
     cout << "Mes: " << endl;
-    cin >> mes;
+    cin >> m;
     cout << "Anio: " << endl;
-    cin >> anio;
+    cin >> a;
 
-    //Transacciones[i].setTipo('D');
     cout<<"SU MONTO ACTUAL ES DE: " << getSaldo() << endl;
 
-    if(monto <= getSaldo() && monto > 0){
+    if(monto > 0){
         setSaldo(getSaldo()+monto);
         cout<<"SU MONTO ACTUALIZADO ES DE: "<<getSaldo()<<endl;
     } else {
         cout << "El monto a extraer debe ser positivo y/o no debe superar la cantidad actual en la cuenta" << endl;
     }
 }
+
+

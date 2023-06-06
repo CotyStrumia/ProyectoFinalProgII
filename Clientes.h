@@ -37,8 +37,7 @@ public:
     float getSaldo();
 
     void baja(int);
-    void extraccion(int num, float monto);
-    void deposito(float);
+    void deposito(float monto);
     void mostrarCliente();
 
 };
