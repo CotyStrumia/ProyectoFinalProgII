@@ -2,7 +2,6 @@
 // Created by COTYS on 24/5/2023.
 //
 #include <iostream>
-#include "archivos.h"
 using namespace std;
 #ifndef PROYECTOFINAL_TRANSACCIONES_H
 #define PROYECTOFINAL_TRANSACCIONES_H
