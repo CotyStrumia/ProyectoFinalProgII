@@ -1,0 +1,13 @@
+LISTA DE CLIENTES
+Numero de cliente:1
+Nombre: cotyApellido: strumia
+Tipo: oro
+Apertura (anio): 2020
+EstadoActivo
+
+
+Numero de cliente:2
+Nombre: beluApellido: treachi
+Tipo: black
+Apertura (anio): 1999
+EstadoActivo

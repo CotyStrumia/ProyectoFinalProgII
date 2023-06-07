@@ -1,0 +1,16 @@
+# ninja log v5
+2	4352	7078081356825141	CMakeFiles/proyectoFinal.dir/Clientes.cpp.obj	b82ab4ccd060b189
+12	4445	7078081357965132	CMakeFiles/proyectoFinal.dir/main.cpp.obj	5f45ed27c0ba4947
+6	7063	7078081795530371	CMakeFiles/proyectoFinal.dir/Transacciones.cpp.obj	d489cef96b92e5d
+8	15974	7078082737629297	CMakeFiles/proyectoFinal.dir/main.cpp.obj	5f45ed27c0ba4947
+18	971	7078083539964465	CMakeFiles/proyectoFinal.dir/archivos.cpp.obj	6a4619b31bb1841d
+9	1079	7078083541058764	CMakeFiles/proyectoFinal.dir/main.cpp.obj	5f45ed27c0ba4947
+1079	1502	7078083545063497	proyectoFinal.exe	64b3092491b3935a
+7	7523	7078087664540425	CMakeFiles/proyectoFinal.dir/main.cpp.obj	5f45ed27c0ba4947
+7524	13728	7078087711159391	proyectoFinal.exe	64b3092491b3935a
+5	1280	7078088918681409	CMakeFiles/proyectoFinal.dir/main.cpp.obj	5f45ed27c0ba4947
+1281	1546	7078088921195741	proyectoFinal.exe	64b3092491b3935a
+6	9439	7078091677754391	CMakeFiles/proyectoFinal.dir/main.cpp.obj	5f45ed27c0ba4947
+9440	9725	7078091680466085	proyectoFinal.exe	64b3092491b3935a
+7	9126	7078098692154314	CMakeFiles/proyectoFinal.dir/main.cpp.obj	5f45ed27c0ba4947
+9127	9408	7078098694937489	proyectoFinal.exe	64b3092491b3935a
