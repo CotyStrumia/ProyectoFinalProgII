@@ -1,7 +1,0 @@
-LISTADO DE CLIENTES
-Numero de cliente:1
-Nombre: bauti
-Apellido: juncos
-Tipo: plata
-Apertura (anio): 2020
-EstadoACTIVO
