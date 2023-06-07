@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
 #include "Clientes.h"
+#include "archivos.h"
 using namespace std;
  //salchichones primavera=3
 
 Clientes Cliente[50];
+archivos archivos();
 int ubicC=0;
 int nro_T=0;
 
@@ -58,14 +60,19 @@ bool verificarFecha(int cDia, int cMes, float cAnio) {
      cin >> cinApellido;
      cout << "Tipo de cliente (plata, oro, black)" << endl;
      cin >> cinTipo;
-     cout << "Momento de apertura de la cuenta" << endl;
+     cout << "Momento (anio) de apertura de la cuenta" << endl;
      cin >> cinApertura;
 
-     Cliente[ubicC] = Clientes(num, cinNombre, cinApellido, cinTipo, cinApertura, "Activo", 0);
+     if(cinApertura>=2020 && (cinTipo=="black" || cinTipo=="BLACK" || cinTipo=="Black")){
+         cout<<"Los clientes con una antiguedad menor a 3 años no pueden ser de tipo black"<<endl;
+     }else{
+         Cliente[ubicC] = Clientes(num, cinNombre, cinApellido, cinTipo, cinApertura, "Activo", 0);
+         cout<<"Se le ha dado alta al cliente: "<<Cliente[ubicC].getNombre()<<" "<<Cliente[ubicC].getApellido()<<" de numero "<<num<<" exitosamente"<<endl;
+         ubicC++;
 
-     cout<<"Se le ha dado alta al cliente: "<<Cliente[ubicC].getNombre()<<" "<<Cliente[ubicC].getApellido()<<" de numero "<<num<<" exitosamente"<<endl;
+         archivos(num);
 
-     ubicC++;
+     }
 
  }
 
@@ -79,7 +86,6 @@ bool verificarFecha(int cDia, int cMes, float cAnio) {
               Cliente[j].baja(cinNumero);
          }
      }
-
  }
 
  void extraccion(){ //LISTO BR0
@@ -219,19 +225,28 @@ bool verificarFecha(int cDia, int cMes, float cAnio) {
          cin>>op;
          switch (op) {
              case 1:
+                 cout<<'\n'<<endl;
                  consultaPorNumeroCli();
                  break;
 
              case 2: {
+                 cout<<'\n'<<endl;
                  mostrarClientes();
                  break;
              }
              case 3: {
+                 cout<<'\n'<<endl;
                  consultaPorNumTr();
                  break;
              }
              case 4: {
+                 cout<<'\n'<<endl;
                  menuTiempo();
+                 break;
+             }
+             default: {
+                 cout<<'\n'<<endl;
+                 cout<<"Ingrese una opcion valida la proxima!"<<endl;
                  break;
              }
          }
@@ -250,9 +265,13 @@ int main() {
     cout<<Cliente[ubicC].getApertura()<<endl;
     cout<<Cliente[ubicC].getEstado()<<endl;
 
-    cout<<"Bienvenido a banco UCC"<<endl;
-    while (opcion>0 && opcion<6){
 
+    cout<<'\n'<<endl;
+
+    cout<<"Bienvenido a banco UCC"<<endl;
+
+    while (opcion>0 && opcion<6){
+        cout<<'\n'<<endl;
         cout<<"Menu:"<<endl;
         cout<<"1.Alta cliente"<<endl;               //Listo
         cout<<"2.Baja cliente"<<endl;               //Listo
@@ -261,6 +280,7 @@ int main() {
         cout<<"5.Mas opciones"<<endl;
         cout<<"6.Salir"<<endl;
         cin>>opcion;
+        cout<<'\n'<<endl;
 
         switch (opcion) {
             case 1:
