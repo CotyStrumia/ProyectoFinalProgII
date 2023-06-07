@@ -101,23 +101,23 @@ void generarClientesTxt(int num) {
         archivoClientes.open("Clientes.txt");                 //Abrimos el fichero en modo escritura (unica vez)
         archivoClientes << "--------------LISTADO DE CLIENTES--------------" << endl;
         archivoClientes << '\n' << endl;
-        archivoClientes << "Numero de cliente:" << Cliente[num - 1].getNumero() << endl;
+        archivoClientes << "Numero de cliente: " << Cliente[num - 1].getNumero() << endl;
         archivoClientes << "Nombre: " << Cliente[num - 1].getNombre() << endl;
         archivoClientes << "Apellido: " << Cliente[num - 1].getApellido() << endl;
         archivoClientes << "Tipo: " << Cliente[num - 1].getTipo() << endl;
         archivoClientes << "Apertura (anio): " << Cliente[num - 1].getApertura() << endl;
-        archivoClientes << "Estado" << Cliente[num - 1].getEstado() << endl;
+        archivoClientes << "Estado: " << Cliente[num - 1].getEstado() << endl;
         archivoClientes.close();
         ifstream fileloaded;
     } else if (num > 1) {
         archivoClientes.open("Clientes.txt", ios::app);        //Abrimos el fichero en modo "añadir"
         archivoClientes << '\n' << endl;
-        archivoClientes << "Numero de cliente:" << Cliente[num - 1].getNumero() << endl;
+        archivoClientes << "Numero de cliente: " << Cliente[num - 1].getNumero() << endl;
         archivoClientes << "Nombre: " << Cliente[num - 1].getNombre() << endl;
         archivoClientes << "Apellido: " << Cliente[num - 1].getApellido() << endl;
         archivoClientes << "Tipo: " << Cliente[num - 1].getTipo() << endl;
         archivoClientes << "Apertura (anio): " << Cliente[num - 1].getApertura() << endl;
-        archivoClientes << "Estado" << Cliente[num - 1].getEstado() << endl;
+        archivoClientes << "Estado: " << Cliente[num - 1].getEstado() << endl;
         archivoClientes.close();
         ifstream fileloaded;
     }
@@ -171,6 +171,26 @@ void bajaCliente() {
             remove("Clientes.txt");
             archivoClientes.open("Clientes.txt");
             archivoClientes << "--------------LISTADO DE CLIENTES--------------" << endl;
+            archivoClientes.close();
+            archivoClientes.open("Clientes.txt", ios::app);
+
+            for(int i=0; i<50; i++){
+                if(Cliente[i].getNumero()!=0){
+                    archivoClientes << '\n' << endl;
+                    archivoClientes << "Numero de cliente: " << Cliente[i].getNumero() << endl;
+                    archivoClientes << "Nombre: " << Cliente[i].getNombre() << endl;
+                    archivoClientes << "Apellido: " << Cliente[i].getApellido() << endl;
+                    archivoClientes << "Tipo: " << Cliente[i].getTipo() << endl;
+                    archivoClientes << "Apertura (anio): " << Cliente[i].getApertura() << endl;
+                    archivoClientes << "Estado: " << Cliente[i].getEstado() << endl;
+
+                }
+            }
+
+            archivoClientes.close();
+
+            ifstream fileloaded;
+
         }
     }
 }
