@@ -1,14 +1,13 @@
 //
 // Created by COTYS on 1/6/2023.
 //
-
 #include <iostream>
-#include "Clientes.h"
 #ifndef PROYECTOFINAL_ARCHIVOS_H
 #define PROYECTOFINAL_ARCHIVOS_H
+
 using namespace std;
 
-class archivos {
+class archivos : public Clientes {
 private:
     int num_cliente;
 public:

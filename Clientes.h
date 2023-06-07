@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Transacciones.h"
+#include "archivos.h"
 #ifndef PROYECTOFINAL_CLIENTES_H
 #define PROYECTOFINAL_CLIENTES_H
 using namespace std;

@@ -6,48 +6,73 @@ using namespace std;
  //salchichones primavera=3
 
 Clientes Cliente[50];
-archivos archivos();
 int ubicC=0;
 int nro_T=0;
 
-/*
-bool verificarFecha(int cDia, int cMes, float cAnio) {
-    if (cMes < 0 && cMes > 12) {
+
+bool verificarFecha(int cDia, int cMes, int cAnio) {
+    if (cMes >0 && cMes < 13) {
         if (cMes == 1 || cMes == 3 || cMes == 5 || cMes == 7 || cMes == 8 || cMes == 10 || cMes == 12) {
             if (cDia < 0 || cDia > 31) {
                 return false;
-            } else if (cMes == 4 || cMes == 6, cMes == 9, cMes == 11) {
-                if (cDia < 0 || cDia > 30) {
-                    return false;
-                } else if (cMes == 28) {
-                    if (cDia < 0 || cDia > 28) {
-                        return false;
-                    }
-                }
+            }
+        }else if (cMes == 4 || cMes == 6, cMes == 9, cMes == 11) {
+            if (cDia < 0 || cDia > 30) {
+                return false;
+            }
+        }else if (cMes == 2) {
+            if (cDia < 0 || cDia > 28) {
+                return false;
             }
         }
-    } else if (cMes > 0 && cMes < 12) {
-        if (cAnio < 0 || cAnio < 2023) {
+       if(cAnio<0 || cAnio>2023){
             return false;
         }
         return true;
-
+    } else if (cMes < 0 || cMes > 12) {
+        return false;
     }
-}*/
+}
+
+bool verificadorAlta(int cAnio){
+    if (cAnio<0 || cAnio>2023){
+        return false;
+    }else{
+        return true;
+    }
+}
 
 
- void menuTiempo(){
-     int opc=1;
-     while (opc>0 && opc<4){
-         cout<<"¿Por qué periodo de tiempo?"<<endl;
-         cout<<"1.Por 6 meses"<<endl;
-         cout<<"2.Por un año"<<endl;
-         cout<<"3.Total"<<endl;
-         cin>>opc;
+ void menuTiempo() {
+     int opc = 1;
+     while (opc > 0 && opc < 4) {
+         cout << "¿Por qué periodo de tiempo?" << endl;
+         cout << "1.Por 6 meses" << endl;
+         cout << "2.Por un año" << endl;
+         cout << "3.Total" << endl;
+         cin >> opc;
+
+         switch (opc) {
+             case 1:
+                 /*trSeisMeses();*/
+                 break;
+
+             case 2:
+                 /*trAnio();*/
+                 break;
+
+             case 3:
+                 /*trTotal();*/
+
+                 break;
+
+         }
 
          //Llamamos a una funcion que evalue segun la opcion ingresada asi no hacemos un switch
      }
  }
+
+
 
 
  void altaCliente(){
@@ -60,17 +85,17 @@ bool verificarFecha(int cDia, int cMes, float cAnio) {
      cin >> cinApellido;
      cout << "Tipo de cliente (plata, oro, black)" << endl;
      cin >> cinTipo;
-     cout << "Momento (anio) de apertura de la cuenta" << endl;
+     cout << "Momento de apertura de la cuenta" << endl;
      cin >> cinApertura;
 
      if(cinApertura>=2020 && (cinTipo=="black" || cinTipo=="BLACK" || cinTipo=="Black")){
          cout<<"Los clientes con una antiguedad menor a 3 años no pueden ser de tipo black"<<endl;
      }else{
          Cliente[ubicC] = Clientes(num, cinNombre, cinApellido, cinTipo, cinApertura, "Activo", 0);
-         cout<<"Se le ha dado alta al cliente: "<<Cliente[ubicC].getNombre()<<" "<<Cliente[ubicC].getApellido()<<" de numero "<<num<<" exitosamente"<<endl;
+         cout<<"Se le ha dado alta al cliente: "<<Cliente[ubicC].getNombre()<<" "<<Cliente[ubicC].getApellido()<<", numero "<<num<<" exitosamente"<<endl;
          ubicC++;
 
-         archivos(num);
+         archivos(num);  //para hacer el txt
 
      }
 
@@ -86,6 +111,7 @@ bool verificarFecha(int cDia, int cMes, float cAnio) {
               Cliente[j].baja(cinNumero);
          }
      }
+
  }
 
  void extraccion(){ //LISTO BR0
@@ -102,36 +128,40 @@ bool verificarFecha(int cDia, int cMes, float cAnio) {
      cout<<"Ingrese su numero de cliente"<<endl;
      cin>>cinNumero;
 
-    for (i = 0; i < 50; i++) {
-        if (Cliente[i].getNumero() == cinNumero && Cliente[i].getEstado() == "Activo") {
+    if(verificarFecha(dia, mes, anio)==true){
 
-            cout<<"Ingrese el monto a extraer"<<endl;
-            cin>>cinMonto;
+        for (i = 0; i < 50; i++) {
+            if (Cliente[i].getNumero() == cinNumero && Cliente[i].getEstado() == "Activo") {
 
-            if(cinMonto<=Cliente[i].getSaldo() && cinMonto>0) {
-                //Cliente[i].extraccion(cinMonto, dia, mes, anio);
+                cout<<"Ingrese el monto a extraer"<<endl;
+                cin>>cinMonto;
 
-                Cliente[i].setSaldo(Cliente[i].getSaldo() - cinMonto);
+                if(cinMonto<=Cliente[i].getSaldo() && cinMonto>0) {
 
-                cout << "SU MONTO ACTUALIZADO ES DE: " << Cliente[i].getSaldo() << endl;
+                    Cliente[i].setSaldo(Cliente[i].getSaldo() - cinMonto);
 
-                Cliente[i].Transacciones[nro_T] = Transacciones(nro_T+1, Cliente[i].getSaldo(), cinMonto, 'E', dia, mes, anio);
+                    cout << "SU MONTO ACTUALIZADO ES DE: " << Cliente[i].getSaldo() << endl;
 
-                Cliente[i].Transacciones[nro_T].mostrarTransaccion();
-                i=49;
-                nro_T++;
+                    Cliente[i].Transacciones[nro_T] = Transacciones(nro_T+1, Cliente[i].getSaldo(), cinMonto, 'E', dia, mes, anio);
 
-            }else{
-                cout<<"ERROR: El monto ingresado es mayor al saldo o es negativo"<<endl;
+                    Cliente[i].Transacciones[nro_T].mostrarTransaccion();
+                    i=49;
+                    nro_T++;
 
-                i=49;
+                }else{
+                    cout<<"ERROR: El monto ingresado es mayor al saldo o es negativo"<<endl;
+
+                    i=49;
+
+                }
+
+            } else if (i == 49 && Cliente[i].getNumero() != cinNumero) {
+                cout << "Cliente no encontrado"<<endl;
 
             }
-
-        } else if (i == 49 && Cliente[i].getNumero() != cinNumero) {
-            cout << "Cliente no encontrado"<<endl;
-
         }
+    } else{
+        cout<<"La fecha ingresada es invalida"<<endl;
     }
 
  }
@@ -151,33 +181,36 @@ bool verificarFecha(int cDia, int cMes, float cAnio) {
      cout<<"Ingrese su numero de cliente"<<endl;
      cin>>cinNumero;
 
-     for (i = 0; i < 50; i++) {
-         if (Cliente[i].getNumero() == cinNumero && Cliente[i].getEstado() == "Activo") {
+     if(verificarFecha(dia, mes, anio)==true) {
+         for (i = 0; i < 50; i++) {
+             if (Cliente[i].getNumero() == cinNumero && Cliente[i].getEstado() == "Activo") {
 
-             cout<<"Ingrese el monto a depositar"<<endl;
-             cin>>cinMonto;
+                 cout << "Ingrese el monto a depositar" << endl;
+                 cin >> cinMonto;
 
-             if(cinMonto>0) {
+                 if (cinMonto > 0) {
 
-                 Cliente[i].setSaldo(Cliente[i].getSaldo() + cinMonto);
+                     Cliente[i].setSaldo(Cliente[i].getSaldo() + cinMonto);
 
-                 cout << "SU MONTO ACTUALIZADO ES DE: " << Cliente[i].getSaldo() << endl;
+                     cout << "SU MONTO ACTUALIZADO ES DE: " << Cliente[i].getSaldo() << endl;
 
-                 Cliente[i].Transacciones[nro_T] = Transacciones(nro_T+1, Cliente[i].getSaldo(), cinMonto, 'D', dia, mes, anio);
+                     Cliente[i].Transacciones[nro_T] = Transacciones(nro_T + 1, Cliente[i].getSaldo(), cinMonto, 'D',
+                                                                     dia, mes, anio);
 
-                 Cliente[i].Transacciones[nro_T].mostrarTransaccion();
-                 i=49;
-                 nro_T++;
+                     Cliente[i].Transacciones[nro_T].mostrarTransaccion();
+                     i = 49;
+                     nro_T++;
 
-             }else{
-                 cout<<"ERROR: El monto ingresado es negativo"<<endl;
-                 i=49;
+                 } else {
+                     cout << "ERROR: El monto ingresado es negativo" << endl;
+                     i = 49;
+
+                 }
+
+             } else if (i == 49 && Cliente[i].getNumero() != cinNumero) {
+                 cout << "Cliente no encontrado" << endl;
 
              }
-
-         } else if (i == 49 && Cliente[i].getNumero() != cinNumero) {
-             cout << "Cliente no encontrado"<<endl;
-
          }
      }
 
@@ -217,36 +250,27 @@ bool verificarFecha(int cDia, int cMes, float cAnio) {
  void menuExtra(){
      int op=1;
      while (op>0 && op<5){
-         cout<<"Ingrese una opcion"<<endl;
+         cout<<"Ingrese una opcion: "<<endl;
          cout<<"1.Consultar cliente (por numero)"<<endl;
          cout<<"2.Mostrar todos los clientes"<<endl;
          cout<<"3.Transacciones de cliente (por numero)"<<endl;
-         cout<<"4.Transacciones por cliente (numero) por tiempo"<<endl;
+         cout<<"4.Informe de transacciones"<<endl;
          cin>>op;
          switch (op) {
              case 1:
-                 cout<<'\n'<<endl;
                  consultaPorNumeroCli();
                  break;
 
              case 2: {
-                 cout<<'\n'<<endl;
                  mostrarClientes();
                  break;
              }
              case 3: {
-                 cout<<'\n'<<endl;
                  consultaPorNumTr();
                  break;
              }
              case 4: {
-                 cout<<'\n'<<endl;
                  menuTiempo();
-                 break;
-             }
-             default: {
-                 cout<<'\n'<<endl;
-                 cout<<"Ingrese una opcion valida la proxima!"<<endl;
                  break;
              }
          }
@@ -265,13 +289,9 @@ int main() {
     cout<<Cliente[ubicC].getApertura()<<endl;
     cout<<Cliente[ubicC].getEstado()<<endl;
 
-
-    cout<<'\n'<<endl;
-
     cout<<"Bienvenido a banco UCC"<<endl;
-
     while (opcion>0 && opcion<6){
-        cout<<'\n'<<endl;
+
         cout<<"Menu:"<<endl;
         cout<<"1.Alta cliente"<<endl;               //Listo
         cout<<"2.Baja cliente"<<endl;               //Listo
@@ -280,7 +300,6 @@ int main() {
         cout<<"5.Mas opciones"<<endl;
         cout<<"6.Salir"<<endl;
         cin>>opcion;
-        cout<<'\n'<<endl;
 
         switch (opcion) {
             case 1:

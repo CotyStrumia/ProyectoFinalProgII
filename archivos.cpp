@@ -3,7 +3,10 @@
 //
 
 #include "archivos.h"
+#include <iostream>
 #include <fstream>
+using namespace std;
+
 
 archivos::archivos() {
     num_cliente=0;
@@ -24,6 +27,8 @@ int archivos::getNum_cliente() {
 void archivos::GenerarArchClientes() {
     ofstream archivo;      //Declaro el archivo
     archivo.open("Clientes.txt");     //Abro el archivo y le doy nombre
+    archivo<<" | Numero de cliente | Nombre | Apellido | Tipo | Apertura | Estado | "<<endl;
+    archivo<<;
 
 
 }
@@ -34,5 +39,5 @@ void archivos::GenerarArchTransaccciones() {
     if(archivo.is_open()){
 
     }
-    
+
 }
