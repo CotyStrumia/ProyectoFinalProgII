@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Transacciones.h"
+#include "tarjetas.h"
 #ifndef PROYECTOFINAL_CLIENTES_H
 #define PROYECTOFINAL_CLIENTES_H
 using namespace std;
@@ -16,6 +17,8 @@ protected:
 public:
 
     Transacciones Transacciones[50];
+
+    tarjetas tarjetas;
 
     Clientes();
     Clientes(int, string, string, string, int, string, float);
@@ -37,8 +40,8 @@ public:
     float getSaldo();
 
     void baja(int);
-    void deposito(float monto);
     void mostrarCliente();
+    void limiteTarjetas();
 
 };
 

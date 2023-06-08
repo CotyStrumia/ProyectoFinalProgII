@@ -91,25 +91,3 @@ void Clientes::mostrarCliente() {
 }
 
 
-void Clientes::deposito(float monto) {
-
-    int d, m, a;
-    cout << "Ingrese la fecha actual: " << endl;
-    cout << "Dia: " << endl;
-    cin >> d;
-    cout << "Mes: " << endl;
-    cin >> m;
-    cout << "Anio: " << endl;
-    cin >> a;
-
-    cout<<"SU MONTO ACTUAL ES DE: " << getSaldo() << endl;
-
-    if(monto > 0){
-        setSaldo(getSaldo()+monto);
-        cout<<"SU MONTO ACTUALIZADO ES DE: "<<getSaldo()<<endl;
-    } else {
-        cout << "El monto a extraer debe ser positivo y/o no debe superar la cantidad actual en la cuenta" << endl;
-    }
-}
-
-
