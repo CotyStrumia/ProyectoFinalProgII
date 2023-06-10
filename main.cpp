@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 #include <stdexcept>
+#include <sstream>
+
 #include "Clientes.h"
 
 using namespace std;
@@ -9,8 +11,8 @@ using namespace std;
 Clientes Cliente[50];          //Instanciacion por defecto de nuestra base de datos de los clientes
 int ubicC = 0;                 //Declaracion de variables globales en constante uso
 int nro_T = 0;
-ofstream archivoClientes;  //Declaramos los ficheros (archivos txt) como globales
-ofstream archivoMovimientos;
+ifstream archivoClientes;  //Declaramos los ficheros (archivos txt) como globales
+ifstream archivoMovimientos;
 
 bool verificarFecha(int cDia, int cMes, int cAnio) {
     if (cMes > 0 && cMes < 13) {
@@ -97,12 +99,12 @@ void menuTiempo() {
 }
 
 void generarClientesTxt(int num) {
-    if (num > 0) {
-        archivoClientes.open("Clientes.txt", ios::app);  //Abrimos el fichero en modo "añadir"
-        archivoClientes <<Cliente[num-1].getNumero() << ", "<<Cliente[num-1].getNombre()<<", "<<Cliente[num-1].getApellido()<<", "<<Cliente[num-1].getTipo()<<", "<<Cliente[num-1].getApertura()<<", "<<Cliente[num-1].getEstado()<<endl;
-        archivoClientes.close();
-        ifstream fileloaded;
-    }
+//    if (num > 0) {
+//        archivoClientes.open("Clientes.txt", ios::app);  //Abrimos el fichero en modo "añadir"
+//        archivoClientes <<Cliente[num-1].getNumero() << ", "<<Cliente[num-1].getNombre()<<", "<<Cliente[num-1].getApellido()<<", "<<Cliente[num-1].getTipo()<<", "<<Cliente[num-1].getApertura()<<", "<<Cliente[num-1].getEstado()<<endl;
+//        archivoClientes.close();
+//        ifstream fileloaded;
+//    }
 }
 
 void altaCliente() {
@@ -156,14 +158,14 @@ void bajaCliente() {
             Cliente[j].baja(cinNumero);
 
             remove("Clientes.txt");
-            archivoClientes.open("Clientes.txt");
-            archivoClientes << "--------------LISTADO DE CLIENTES--------------" << endl;
-            archivoClientes.close();
-            archivoClientes.open("Clientes.txt", ios::app);
+//            archivoClientes.open("Clientes.txt");
+//            archivoClientes << "--------------LISTADO DE CLIENTES--------------" << endl;
+//            archivoClientes.close();
+//            archivoClientes.open("Clientes.txt", ios::app);
 
             for(int i=0; i<50; i++){
                 if(Cliente[i].getNumero()!=0){
-                    archivoClientes <<Cliente[i].getNumero() << ", "<<Cliente[i].getNombre()<<", "<<Cliente[i].getApellido()<<", "<<Cliente[i].getTipo()<<", "<<Cliente[i].getApertura()<<endl;
+//                    archivoClientes <<Cliente[i].getNumero() << " "<<Cliente[i].getNombre()<<" "<<Cliente[i].getApellido()<<" "<<Cliente[i].getTipo()<<" "<<Cliente[i].getApertura()<<endl;
                 }
             }
 
@@ -174,7 +176,6 @@ void bajaCliente() {
         }
     }
 }
-
 
 void extraccion() { //LISTO BR0
     int cinNumero, dia, mes, anio, i = 0;
@@ -211,12 +212,12 @@ void extraccion() { //LISTO BR0
 
                     if (archivoMovimientos.is_open()) {
 
-                        archivoMovimientos << Cliente[i].getNumero() <<", "<<Cliente[i].Transacciones[nro_T].getNroTran()<<", "<< Cliente[i].Transacciones[nro_T].getCant()<<", "<<Cliente[i].Transacciones[nro_T].getTipo()<<", "<<Cliente[i].Transacciones[nro_T].getDia()<<", "<<Cliente[i].Transacciones[nro_T].getMes()<<", "<<Cliente[i].Transacciones[nro_T].getAnio()<<endl;
+//                        archivoMovimientos << Cliente[i].getNumero() <<", "<<Cliente[i].Transacciones[nro_T].getNroTran()<<", "<< Cliente[i].Transacciones[nro_T].getCant()<<", "<<Cliente[i].Transacciones[nro_T].getTipo()<<", "<<Cliente[i].Transacciones[nro_T].getDia()<<", "<<Cliente[i].Transacciones[nro_T].getMes()<<", "<<Cliente[i].Transacciones[nro_T].getAnio()<<endl;
                         ifstream fileloaded;
 
                     } else {
                         archivoMovimientos.open("Movimientos.txt");
-                        archivoMovimientos << Cliente[i].getNumero() <<", "<<Cliente[i].Transacciones[nro_T].getNroTran()<<", "<< Cliente[i].Transacciones[nro_T].getCant()<<", "<<Cliente[i].Transacciones[nro_T].getTipo()<<", "<<Cliente[i].Transacciones[nro_T].getDia()<<", "<<Cliente[i].Transacciones[nro_T].getMes()<<", "<<Cliente[i].Transacciones[nro_T].getAnio()<<endl;
+//                        archivoMovimientos << Cliente[i].getNumero() <<", "<<Cliente[i].Transacciones[nro_T].getNroTran()<<", "<< Cliente[i].Transacciones[nro_T].getCant()<<", "<<Cliente[i].Transacciones[nro_T].getTipo()<<", "<<Cliente[i].Transacciones[nro_T].getDia()<<", "<<Cliente[i].Transacciones[nro_T].getMes()<<", "<<Cliente[i].Transacciones[nro_T].getAnio()<<endl;
                         ifstream fileloaded;
                     }
 
@@ -276,12 +277,12 @@ void deposito() {
                     if (archivoMovimientos.is_open()) {
 
 
-                        archivoMovimientos << Cliente[i].getNumero() <<", "<<Cliente[i].Transacciones[nro_T].getNroTran()<<", "<< Cliente[i].Transacciones[nro_T].getCant()<<", "<<Cliente[i].Transacciones[nro_T].getTipo()<<", "<<Cliente[i].Transacciones[nro_T].getDia()<<", "<<Cliente[i].Transacciones[nro_T].getMes()<<", "<<Cliente[i].Transacciones[nro_T].getAnio()<<endl;
+//                        archivoMovimientos << Cliente[i].getNumero() <<", "<<Cliente[i].Transacciones[nro_T].getNroTran()<<", "<< Cliente[i].Transacciones[nro_T].getCant()<<", "<<Cliente[i].Transacciones[nro_T].getTipo()<<", "<<Cliente[i].Transacciones[nro_T].getDia()<<", "<<Cliente[i].Transacciones[nro_T].getMes()<<", "<<Cliente[i].Transacciones[nro_T].getAnio()<<endl;
                         ifstream fileloaded;
 
                     } else {
                         archivoMovimientos.open("Movimientos.txt");
-                        archivoMovimientos << Cliente[i].getNumero() <<", "<<Cliente[i].Transacciones[nro_T].getNroTran()<<", "<< Cliente[i].Transacciones[nro_T].getCant()<<", "<<Cliente[i].Transacciones[nro_T].getTipo()<<", "<<Cliente[i].Transacciones[nro_T].getDia()<<", "<<Cliente[i].Transacciones[nro_T].getMes()<<", "<<Cliente[i].Transacciones[nro_T].getAnio()<<endl;
+//                        archivoMovimientos << Cliente[i].getNumero() <<", "<<Cliente[i].Transacciones[nro_T].getNroTran()<<", "<< Cliente[i].Transacciones[nro_T].getCant()<<", "<<Cliente[i].Transacciones[nro_T].getTipo()<<", "<<Cliente[i].Transacciones[nro_T].getDia()<<", "<<Cliente[i].Transacciones[nro_T].getMes()<<", "<<Cliente[i].Transacciones[nro_T].getAnio()<<endl;
                         ifstream fileloaded;
                     }
 
@@ -376,27 +377,125 @@ void menuExtra() {
     }
 }
 
-void leerArchivo(){
-    ifstream archivo("Clientes.txt");
-    string linea;
-    for(int i=0; i<50; i++){
-        for (int j=0; j<7; j++){
-        }
-   }
+void leerArchivoCliente(){
 
+    ifstream archivo("Clientes.txt");
+    string linea, dato;
+    stringstream s;     //linea
+    while(getline(archivo, linea, '\n')){
+
+        s.str(linea);
+
+        int cont=-1;
+
+        while(getline(s, dato, ',')){
+            cout<<dato<<endl;
+
+            cont++;
+
+                switch (cont) {
+                    case 0: {
+                        stringstream convertir1;   //Objeto de tipo stringstream
+
+                        convertir1 << dato;      //Colocamos el string en el objeto convertir
+
+                        int number1;           //variable que tendra el string convertido
+
+                        convertir1 >> number1;   //extraemos de 'convertir' el int
+
+                        Cliente[ubicC].setNumero(number1); //buscar conversion de tipo
+
+                        cout<<Cliente[ubicC].getNumero()<<endl;
+
+                        break;
+                    }
+                    case 1:{
+                        Cliente[ubicC].setNombre(dato);
+
+                        break;
+                    }
+                    case 2:
+                        Cliente[ubicC].setApellido(dato);
+                        break;
+                    case 3:
+                        Cliente[ubicC].setTipo(dato);
+                        break;
+                    case 4:{
+
+                        stringstream convertir2;
+
+                        convertir2 << dato;
+
+                        int number2;
+
+                        convertir2 >> number2;
+
+                        Cliente[ubicC].setApertura(number2);
+                        break;
+                    }
+                    case 5:
+                        Cliente[ubicC].setEstado(dato);
+                        Cliente[ubicC].setSaldo(0);
+                        break;
+            }
+            cont++;
+        }
+        s.clear();
+        ubicC++;      //en este while me voy elevando a uno en la ubic del cliente
+    }
+
+    archivoClientes.close();
 }
+
+
+/*void leerArchivoMov(){
+    ifstream archivo ("Movimientos.txt");
+    string linea, dato;
+    stringstream s;
+    while(getline(archivo, linea, '\n')){
+        s.str(linea);
+
+        int cont=-1;
+
+       while(getline(s, dato, ',')){
+            cout<<dato<<endl;
+            cont++;
+            switch (cont) {
+                case 0:
+                    Clientes.Transacciones[ubicT]
+                    break;
+                case 1:
+                    Cliente[ubicC].Transacciones[]
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+            }
+                
+            }
+
+
+        }
+*/
 
 int main() {
     int opcion = 1;
 
 
-    archivoClientes.open("Clientes.txt");                 //Abrimos el fichero en modo escritura (unica vez)
-    archivoClientes << "--------------LISTADO DE CLIENTES--------------" << endl;
-    archivoClientes.close();
+//    archivoClientes.open("Clientes.txt");                 //Abrimos el fichero en modo escritura (unica vez)
+//    archivoClientes << "--------------LISTADO DE CLIENTES--------------" << endl;
+//    archivoClientes.close();
     ifstream fileloaded;
 
-    leerArchivo();
-
+    leerArchivoCliente();
+    //leerArchivoMov();
     cout << "Bienvenido a banco UCC" << endl;
     while (opcion > 0 && opcion < 7) {
 
